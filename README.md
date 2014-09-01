@@ -1,6 +1,8 @@
 # ForceDomain
 
-TODO: Write a gem description
+Rack middleware that will redirect all request that are not from the specified domain
+
+Useful for redirecting website.herokuapp.com to www.website.com
 
 ## Installation
 
@@ -18,7 +20,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Not Rails
+
+```ruby
+use ForceDomain::Middleware
+```
+
+### Rails
+
+The middleware will be inserted automatically
+
+---
+
+
+Now all you need to do is set the environment key `APP_DOMAIN` to your specific domain
+
+Example:
+
+```shell
+heroku config:set APP_DOMAIN=www.website.com
+```
+
+All requests made to website.herokuapp.com will now 301 redirect to www.website.com keeping path and query parameters
 
 ## Contributing
 
