@@ -20,18 +20,13 @@ Or install it yourself as:
 
 ## Usage
 
-### Not Rails
+If your using Rails, the middleware will be inserted automatically
+
+Otherwise you have to insert it manually
 
 ```ruby
 use ForceDomain::Middleware
 ```
-
-### Rails
-
-The middleware will be inserted automatically
-
----
-
 
 Now all you need to do is set the environment key `APP_DOMAIN` to your specific domain
 
