@@ -38,6 +38,9 @@ heroku config:set APP_DOMAIN=www.website.com
 
 All requests made to website.herokuapp.com will now 301 redirect to www.website.com keeping path and query parameters
 
+You can allow multiple domains by adding them to `APP_DOMAIN` seperated by comma.
+In case of a redirect then the first mentioned domain will be used.
+
 ## Contributing
 
 1. Fork it ( https://github.com/askehansen/force_domain/fork )

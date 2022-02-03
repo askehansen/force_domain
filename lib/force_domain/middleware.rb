@@ -5,7 +5,7 @@ module ForceDomain
     end
 
     def call(env)
-      if ENV['APP_DOMAIN'] && env['HTTP_HOST'] != ENV['APP_DOMAIN']
+      if allowed_domains.any? && !allowed_domains.include?(env['HTTP_HOST'])
         [301, {'Location' => new_location(env), 'Content-Type' => 'text/html', 'Content-Length' => '0'}, []]
       else
         @app.call(env)
@@ -14,9 +14,13 @@ module ForceDomain
 
     private
 
+      def allowed_domains
+        ENV['APP_DOMAIN'].to_s.split(',').map(&:strip)
+      end
+
       def new_location(env)
         scheme = env['rack.url_scheme']
-        domain = ENV['APP_DOMAIN']
+        domain = allowed_domains.first
         path = env['PATH_INFO']
         query_string = env['QUERY_STRING'].to_s
 
